@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-sc-cream: #FAFAF8;
+  --color-sc-dark: #1A1A18;
+  --color-sc-gold: #C9A882;
+  --color-sc-muted: #6B6B65;
+  --color-sc-border: #E8E5DF;
+  --color-sc-warm: #F5F0E8;
+  --font-display: var(--font-cormorant), serif;
+  --font-body: var(--font-dm-sans), sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  font-size: 14px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FAFAF8;
+  color: #1A1A18;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Product card hover */
+.product-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Hero title staggered fade-up */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-title span:nth-child(1) { animation: fadeUp 0.7s ease 0.1s both; }
+.hero-title span:nth-child(2) { animation: fadeUp 0.7s ease 0.25s both; }
+.hero-title span:nth-child(3) { animation: fadeUp 0.7s ease 0.4s both; }
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* scrollbar-hide alias */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-title span { animation: none; opacity: 1; transform: none; }
+  .product-card { transition: none; }
+}
+
+/* Section transition — fond clair vers fond sombre, légère ombre portée */
+section + section {
+  position: relative;
+}
+
+/* Smooth image hover on formation cards */
+.form-card-img {
+  transition: transform 0.5s ease;
+}
+.form-card-img:hover {
+  transform: scale(1.03);
 }

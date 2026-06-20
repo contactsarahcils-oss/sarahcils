@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sarah Cils — Produits professionnels extensions de cils</title>
+<meta name="description" content="Produits créés par une lash artist pour les lash artists. Colles, primers, bouquets préfaits. Testés en cabine à Marseille. Formations certifiantes." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --sc-cream:  #FAFAF8;
+    --sc-dark:   #1A1A18;
+    --sc-gold:   #C9A882;
+    --sc-muted:  #6B6B65;
+    --sc-border: #E8E5DF;
+    --sc-warm:   #F5F0E8;
+    --sc-pine:   #1A6B6B;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--sc-dark);
+    background: var(--sc-cream);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  .font-display { font-family: var(--font-display); }
+  .italic { font-style: italic; }
+
+  .container { max-width: 1240px; margin: 0 auto; }
+
+  .px { padding-left: 16px; padding-right: 16px; }
+  @media (min-width: 768px) { .px { padding-left: 32px; padding-right: 32px; } }
+  @media (min-width: 1024px) { .px { padding-left: 48px; padding-right: 48px; } }
+
+  .section-pad { padding-top: 40px; padding-bottom: 40px; }
+  @media (min-width: 768px) { .section-pad { padding-top: 64px; padding-bottom: 64px; } }
+
+  .eyebrow {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--sc-gold);
+  }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.15;
+  }
+  @media (min-width: 768px) { h2.section-title { font-size: 30px; } }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---------- Hero title stagger ---------- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  /* Hero title is statically visible — never gated behind JS/transition timing,
+     so the most important element on the page can never be stranded invisible. */
+  .hero-title span { opacity: 1; transform: none; white-space: nowrap; }
+
+  /* ---------- Product card hover ---------- */
+  .product-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+  }
+
+  /* ================= NAVBAR ================= */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(250,250,248,0.95);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--sc-border);
+  }
+  .nav-inner {
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  @media (min-width: 768px) { .nav-inner { height: 64px; } }
+
+  .nav-logo img { height: 28px; width: auto; }
+  @media (min-width: 768px) { .nav-logo img { height: 32px; } }
+
+  .nav-links { display: none; gap: 32px; }
+  @media (min-width: 768px) { .nav-links { display: flex; } }
+  .nav-links a {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--sc-dark);
+    transition: color 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--sc-gold); }
+
+  .burger {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  @media (min-width: 768px) { .burger { display: none; } }
+  .burger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--sc-dark);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .burger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+  /* mobile nav: keep logo centered, burger left */
+  .nav-spacer { width: 34px; }
+  @media (min-width: 768px) { .nav-spacer { display: none; } }
+  @media (max-width: 767px) {
+    .nav-inner { justify-content: space-between; }
+    .nav-logo { position: absolute; left: 50%; transform: translateX(-50%); }
+  }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid var(--sc-border);
+    background: var(--sc-cream);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    padding: 14px 16px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-bottom: 1px solid var(--sc-border);
+    color: var(--sc-dark);
+  }
+  @media (min-width: 768px) { .mobile-menu { display: none !important; } }
+
+  /* ================= HERO ================= */
+  .hero {
+    position: relative;
+    height: 72vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  @media (min-width: 768px) { .hero { height: 85vh; } }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.35); }
+  .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 20px; }
+
+  .hero-title { text-align: center; }
+  .hero-title span { display: block; }
+  .hl-1 { font-family: var(--font-display); font-style: italic; font-weight: 400; color: rgba(255,255,255,0.75); font-size: 18px; letter-spacing: 0.03em; margin-bottom: 4px; }
+  .hl-2 { font-family: var(--font-display); font-weight: 500; color: #fff; font-size: 36px; line-height: 1.1; }
+  .hl-3 { font-family: var(--font-display); font-style: italic; font-weight: 400; color: var(--sc-gold); font-size: 28px; line-height: 1.1; }
+  @media (min-width: 768px) {
+    .hl-1 { font-size: 24px; }
+    .hl-2 { font-size: 60px; }
+    .hl-3 { font-size: 48px; }
+  }
+
+  .hero-meta {
+    color: rgba(255,255,255,0.55);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 28px;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: #fff;
+    color: var(--sc-dark);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .hero-cta:hover { background: var(--sc-gold); color: #fff; }
+
+  /* ================= TRUST BAR ================= */
+  .trust { background: #F2F1EF; }
+  .trust-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: 768px) { .trust-grid { grid-template-columns: repeat(4, 1fr); } }
+  .trust-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    padding: 28px 16px;
+    border-right: 1px solid var(--sc-border);
+  }
+  .trust-col:nth-child(2n) { border-right: none; }
+  @media (min-width: 768px) {
+    .trust-col { border-right: 1px solid var(--sc-border); }
+    .trust-col:nth-child(2n) { border-right: 1px solid var(--sc-border); }
+    .trust-col:last-child { border-right: none; }
+  }
+  .trust-icon { font-size: 20px; color: var(--sc-muted); line-height: 1; }
+  .trust-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--sc-pine); }
+  .trust-text { font-size: 12px; color: var(--sc-muted); line-height: 1.6; margin-top: 2px; }
+  .trust-text a { color: var(--sc-pine); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ================= PRODUCTS ================= */
+  .prod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  @media (min-width: 768px) { .prod-grid { gap: 16px; } }
+
+  .product-card { display: block; }
+  .prod-imgwrap {
+    position: relative;
+    background: var(--sc-warm);
+    border-radius: 12px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+  .prod-imgwrap img { width: 100%; height: 100%; object-fit: contain; padding: 12px; }
+  @media (min-width: 768px) { .prod-imgwrap img { padding: 16px; } }
+  .badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 999px;
+    padding: 2px 8px;
+    color: #fff;
+  }
+  .badge-best { background: var(--sc-dark); }
+  .badge-new { background: var(--sc-gold); }
+  .prod-name {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    margin-top: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .prod-price { font-size: 12px; font-weight: 600; }
+  @media (min-width: 768px) {
+    .prod-name { font-size: 12px; }
+    .prod-price { font-size: 14px; }
+  }
+
+  /* ================= SLIDER ================= */
+  .slider-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  .slider-head a { font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--sc-muted); transition: color 0.25s ease; }
+  .slider-head a:hover { color: var(--sc-gold); }
+
+  .slider-wrap { position: relative; }
+  .slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 12px;
+    padding-bottom: 8px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+  .slider::-webkit-scrollbar { display: none; }
+  .slide-card { scroll-snap-align: start; flex-shrink: 0; width: 160px; }
+  @media (min-width: 768px) { .slide-card { width: 192px; } }
+  .slide-imgwrap {
+    background: var(--sc-warm);
+    border-radius: 12px;
+    height: 176px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .slide-imgwrap img { object-fit: contain; padding: 12px; width: 100%; height: 100%; }
+  .slide-badge { font-size: 9px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--sc-muted); margin-top: 4px; display: block; }
+  .slide-name { font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .slide-price { font-size: 12px; font-weight: 600; }
+
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    border-radius: 999px;
+    border: none;
+    color: var(--sc-dark);
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .slider-btn:hover { background: var(--sc-gold); color: #fff; }
+  @media (min-width: 768px) { .slider-btn { display: flex; } }
+  .slider-btn.prev { left: -8px; }
+  .slider-btn.next { right: -8px; }
+
+  /* ================= BEST SELLER FOCUS ================= */
+  .bs { background: var(--sc-dark); }
+  .bs-grid { display: grid; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .bs-grid { grid-template-columns: 1fr 1fr; } }
+  .bs-text { padding: 40px 16px; display: flex; flex-direction: column; justify-content: center; }
+  @media (min-width: 768px) { .bs-text { padding: 64px 56px; } }
+  .bs-eyebrow { font-size: 11px; letter-spacing: 0.2em; color: var(--sc-gold); text-transform: uppercase; }
+  .bs-title { font-family: var(--font-display); font-weight: 400; font-size: 30px; color: #fff; margin-top: 12px; }
+  @media (min-width: 768px) { .bs-title { font-size: 40px; } }
+  .bs-list { list-style: none; margin: 24px 0 28px; display: flex; flex-direction: column; gap: 12px; }
+  .bs-list li { color: rgba(255,255,255,0.7); font-size: 14px; display: flex; gap: 10px; }
+  .bs-list li::before { content: "•"; color: var(--sc-gold); }
+  .bs-cta {
+    align-self: flex-start;
+    border: 1px solid var(--sc-gold);
+    color: var(--sc-gold);
+    padding: 10px 24px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .bs-cta:hover { background: var(--sc-gold); color: var(--sc-dark); }
+  .bs-img { height: 320px; width: 100%; object-fit: cover; }
+  @media (min-width: 768px) { .bs-img { height: 100%; } }
+
+  /* ================= ABOUT ================= */
+  .about { background: var(--sc-cream); }
+  .about-grid { display: grid; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .about-grid { grid-template-columns: 1fr 1fr; } }
+  .about-img { height: 288px; width: 100%; object-fit: cover; order: 1; }
+  @media (min-width: 768px) { .about-img { height: 100%; order: 2; } }
+  .about-text { padding: 40px 16px; order: 2; }
+  @media (min-width: 768px) { .about-text { padding: 56px; order: 1; } }
+  .about-text h2 { margin-top: 12px; }
+  .about-text p { font-size: 14px; color: var(--sc-muted); line-height: 1.7; margin-top: 14px; max-width: 46ch; }
+  .about-cta {
+    display: inline-block;
+    margin-top: 28px;
+    border: 1px solid var(--sc-dark);
+    color: var(--sc-dark);
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .about-cta:hover { background: var(--sc-dark); color: #fff; }
+
+  /* ================= REVIEWS ================= */
+  .reviews { background: var(--sc-warm); text-align: center; }
+  .reviews .stat { font-family: var(--font-display); font-size: 30px; margin-top: 8px; }
+  @media (min-width: 768px) { .reviews .stat { font-size: 40px; } }
+  .stars { color: var(--sc-gold); letter-spacing: 3px; margin-top: 6px; font-size: 16px; }
+  .quote { max-width: 36rem; margin: 24px auto 0; font-family: var(--font-display); font-style: italic; font-size: 18px; color: var(--sc-muted); line-height: 1.5; }
+  .quote-author { font-family: var(--font-body); font-style: normal; font-size: 12px; letter-spacing: 0.08em; color: var(--sc-muted); margin-top: 14px; text-transform: uppercase; }
+
+  /* ================= SERVICES ================= */
+  .services { background: var(--sc-dark); }
+  .services h2 { color: #fff; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  @media (max-width: 767px) {
+    .services-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 12px;
+      scrollbar-width: none;
+    }
+    .services-grid::-webkit-scrollbar { display: none; }
+  }
+  .service-card { background: #242420; border-radius: 12px; padding: 24px; }
+  @media (max-width: 767px) { .service-card { scroll-snap-align: start; flex-shrink: 0; width: 80vw; } }
+  .service-icon { font-size: 22px; color: var(--sc-gold); }
+  .service-title { color: #fff; font-size: 14px; font-weight: 500; margin-top: 14px; }
+  .service-text { color: rgba(255,255,255,0.6); font-size: 12px; line-height: 1.6; margin-top: 8px; }
+  .service-link { display: block; color: var(--sc-gold); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 16px; }
+  .service-link:hover { text-decoration: underline; }
+
+  /* ================= FORMATIONS ================= */
+  .formations { background: var(--sc-cream); }
+  .form-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 32px; }
+  @media (min-width: 768px) { .form-grid { grid-template-columns: 1fr 1fr; } }
+  .form-card { }
+  .form-imgwrap { position: relative; border-radius: 12px; overflow: hidden; height: 360px; }
+  .form-imgwrap img { width: 100%; height: 100%; object-fit: cover; }
+  .form-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.7)); }
+  .form-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(255,255,255,0.9);
+    color: var(--sc-dark);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-radius: 999px;
+    padding: 4px 12px;
+  }
+  .form-caption { position: absolute; bottom: 16px; left: 16px; right: 16px; }
+  .form-caption h3 { font-family: var(--font-display); color: #fff; font-size: 22px; font-weight: 500; }
+  .form-caption p { color: rgba(255,255,255,0.8); font-size: 12px; margin-top: 2px; }
+  .form-bullets { list-style: none; margin: 16px 0 0; display: flex; flex-direction: column; gap: 8px; }
+  .form-bullets li { font-size: 13px; color: var(--sc-muted); display: flex; gap: 8px; }
+  .form-bullets li::before { content: "•"; color: var(--sc-gold); }
+  .form-cta { display: inline-block; margin-top: 18px; color: var(--sc-dark); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; border-bottom: 1px solid var(--sc-gold); padding-bottom: 2px; }
+  .form-cta:hover { color: var(--sc-gold); }
+
+  /* ================= INSTAGRAM CTA ================= */
+  .insta { background: var(--sc-dark); text-align: center; padding-top: 48px; padding-bottom: 48px; }
+  .insta h2 { color: #fff; font-family: var(--font-display); font-size: 24px; font-weight: 400; }
+  @media (min-width: 768px) { .insta h2 { font-size: 30px; } }
+  .insta p { color: rgba(255,255,255,0.6); font-size: 14px; margin-top: 8px; }
+  .insta-cta {
+    display: inline-block;
+    margin-top: 24px;
+    border: 1px solid rgba(255,255,255,0.5);
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  .insta-cta:hover { background: #fff; color: var(--sc-dark); border-color: #fff; }
+
+  /* ================= FOOTER ================= */
+  .footer { background: var(--sc-dark); padding: 40px 16px 24px; }
+  @media (min-width: 768px) { .footer { padding: 40px 32px 24px; } }
+  .footer-logo img { height: 30px; width: auto; filter: brightness(0) invert(1); }
+  .footer-info { color: rgba(255,255,255,0.65); font-size: 13px; line-height: 1.9; margin-top: 18px; }
+  .footer-info a { color: rgba(255,255,255,0.65); }
+  .footer-info a:hover { color: var(--sc-gold); }
+  .footer-sep { border: none; border-top: 1px solid rgba(232,229,223,0.3); margin: 24px 0; }
+  .footer-legal { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .footer-legal a { color: rgba(255,255,255,0.5); font-size: 12px; }
+  .footer-legal a:hover { color: var(--sc-gold); }
+  .footer-copy { color: rgba(255,255,255,0.3); font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<template id="__bundler_thumbnail" data-bg-color="#1A1A18">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#1A1A18" />
+    <text x="600" y="380" text-anchor="middle" font-family="Georgia, 'Cormorant Garamond', serif" font-size="120" font-style="italic" fill="#C9A882">Sarah</text>
+    <text x="600" y="500" text-anchor="middle" font-family="Georgia, 'Cormorant Garamond', serif" font-size="120" fill="#FAFAF8" letter-spacing="6">CILS</text>
+    <text x="600" y="585" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="26" fill="#6B6B65" letter-spacing="10">MARSEILLE · DEPUIS 2024</text>
+  </svg>
+</template>
+
+<!-- 1. NAVBAR -->
+<header class="nav">
+  <div class="container px nav-inner">
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="#" class="nav-logo">
+      <img src="https://static.wixstatic.com/media/54d2ff_cb10be114fc34635bc46de799b2c474b~mv2.png/v1/crop/x_0,y_186,w_563,h_191/fill/w_310,h_100,al_c,q_85,enc_avif,quality_auto/SARAH%20CILS.png" alt="Sarah Cils" />
+    </a>
+    <nav class="nav-links">
+      <a href="#">Accueil</a>
+      <a href="https://www.sarahcils.com/boutique">Boutique</a>
+      <a href="#formations">Formations</a>
+      <a href="#services">Prestations</a>
+      <a href="#footer">Contact</a>
+    </nav>
+    <div class="nav-spacer"></div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#">Accueil</a>
+    <a href="https://www.sarahcils.com/boutique">Boutique</a>
+    <a href="#formations">Formations</a>
+    <a href="#services">Prestations</a>
+    <a href="#footer">Contact</a>
+  </div>
+</header>
+
+<!-- 2. HERO -->
+<section class="hero">
+  <img class="hero-bg" src="https://static.wixstatic.com/media/dec4a3_eeb21cfa62454afb91247f0230157ff2~mv2.jpg/v1/fill/w_1400,h_900,al_c,q_85,enc_avif,quality_auto/hero.jpg" alt="" />
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">
+      <span class="hl-1">Les produits créés par</span>
+      <span class="hl-2">une lash artist</span>
+      <span class="hl-3">pour les lash artists.</span>
+    </h1>
+    <p class="hero-meta">✦ +200 avis 5/5 · Marseille · Depuis 2024</p>
+    <a class="hero-cta" href="https://www.sarahcils.com/boutique">Découvrir la boutique</a>
+  </div>
+</section>
+
+<!-- 3. TRUST BAR -->
+<section class="trust">
+  <div class="container trust-grid">
+    <div class="trust-col">
+      <span class="trust-icon">★★★★</span>
+      <span class="trust-title">Qualité</span>
+      <span class="trust-text">Des produits sélectionnés et testés avec exigence.</span>
+    </div>
+    <div class="trust-col">
+      <span class="trust-icon">⏱</span>
+      <span class="trust-title">Testés en institut</span>
+      <span class="trust-text">Utilisés chaque jour dans notre studio beauté.</span>
+    </div>
+    <div class="trust-col">
+      <span class="trust-icon">◈</span>
+      <span class="trust-title">Performance</span>
+      <span class="trust-text">Tenue optimale et résultats impeccables.</span>
+    </div>
+    <div class="trust-col">
+      <span class="trust-icon">♡</span>
+      <span class="trust-title">Lash artist</span>
+      <span class="trust-text"><a href="https://www.instagram.com/saraahcils/">@saraahcils</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- 4. PRODUITS VEDETTES -->
+<section class="section-pad">
+  <div class="container px">
+    <p class="eyebrow">Nos indispensables</p>
+    <h2 class="section-title reveal" style="margin-top:6px; margin-bottom:24px;">La gamme essentielle</h2>
+    <div class="prod-grid">
+      <a class="product-card reveal" href="https://www.sarahcils.com/product-page/colle">
+        <div class="prod-imgwrap">
+          <span class="badge badge-best">Best Seller</span>
+          <img src="https://static.wixstatic.com/media/54d2ff_3c3fa85807c84a5c8041e3bfdee96bff~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/la-colle.png" alt="La Colle" />
+        </div>
+        <p class="prod-name">La Colle</p>
+        <p class="prod-price">28,00 €</p>
+      </a>
+      <a class="product-card reveal" href="https://www.sarahcils.com/product-page/colle-first-sarah-cils">
+        <div class="prod-imgwrap">
+          <span class="badge badge-new">Nouveauté</span>
+          <img src="https://static.wixstatic.com/media/54d2ff_1984878f25e345f4af50ad3f5cdc4080~mv2.jpeg/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/colle-first.jpg" alt="Colle First" />
+        </div>
+        <p class="prod-name">Colle First</p>
+        <p class="prod-price">24,99 €</p>
+      </a>
+      <a class="product-card reveal" href="https://www.sarahcils.com/product-page/primer-cils-liquide-sarah-cils">
+        <div class="prod-imgwrap">
+          <img src="https://static.wixstatic.com/media/54d2ff_ed8a0c517ae043848b076aa3edb772a4~mv2.jpeg/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/primer.jpg" alt="Primer Cils" />
+        </div>
+        <p class="prod-name">Primer Cils</p>
+        <p class="prod-price">15,99 €</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. SLIDER GAMME COMPLÈTE -->
+<section class="section-pad" style="padding-top:0;">
+  <div class="container px">
+    <div class="slider-head" style="margin-bottom:20px;">
+      <h2 class="section-title reveal">La gamme complète</h2>
+      <a href="https://www.sarahcils.com/boutique">Voir tout →</a>
+    </div>
+    <div class="slider-wrap">
+      <button class="slider-btn prev" id="sliderPrev" aria-label="Précédent">‹</button>
+      <div class="slider" id="slider">
+        <a class="slide-card product-card" href="https://www.sarahcils.com/product-page/colle">
+          <div class="slide-imgwrap"><img src="https://static.wixstatic.com/media/54d2ff_3c3fa85807c84a5c8041e3bfdee96bff~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/la-colle.png" alt="La Colle" /></div>
+          <span class="slide-badge">Best Seller</span>
+          <p class="slide-name">La Colle</p>
+          <p class="slide-price">28,00 €</p>
+        </a>
+        <a class="slide-card product-card" href="https://www.sarahcils.com/product-page/colle-first-sarah-cils">
+          <div class="slide-imgwrap"><img src="https://static.wixstatic.com/media/54d2ff_1984878f25e345f4af50ad3f5cdc4080~mv2.jpeg/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/colle-first.jpg" alt="Colle First" /></div>
+          <span class="slide-badge">Nouveauté</span>
+          <p class="slide-name">Colle First</p>
+          <p class="slide-price">24,99 €</p>
+        </a>
+        <a class="slide-card product-card" href="https://www.sarahcils.com/product-page/primer-cils-liquide-sarah-cils">
+          <div class="slide-imgwrap"><img src="https://static.wixstatic.com/media/54d2ff_ed8a0c517ae043848b076aa3edb772a4~mv2.jpeg/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/primer.jpg" alt="Primer Cils" /></div>
+          <p class="slide-name">Primer Cils</p>
+          <p class="slide-price">15,99 €</p>
+        </a>
+        <a class="slide-card product-card" href="https://www.sarahcils.com/product-page/colle-middle-sarah-cils">
+          <div class="slide-imgwrap"><img src="https://static.wixstatic.com/media/54d2ff_1984878f25e345f4af50ad3f5cdc4080~mv2.jpeg/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/colle-middle.jpg" alt="Colle Middle" /></div>
+          <span class="slide-badge">Nouveauté</span>
+          <p class="slide-name">Colle Middle</p>
+          <p class="slide-price">25,00 €</p>
+        </a>
+        <a class="slide-card product-card" href="https://www.sarahcils.com/product-page/bouquets-pr%C3%A9faits-palette">
+          <div class="slide-imgwrap"><img src="https://static.wixstatic.com/media/54d2ff_3c3fa85807c84a5c8041e3bfdee96bff~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/bouquets-palette.png" alt="Bouquets Palette" /></div>
+          <p class="slide-name">Bouquets Palette</p>
+          <p class="slide-price">25,00 €</p>
+        </a>
+        <a class="slide-card product-card" href="https://www.sarahcils.com/product-page/bouquets-pr%C3%A9faits-10-courbure-d-sarah-cils">
+          <div class="slide-imgwrap"><img src="https://static.wixstatic.com/media/54d2ff_3c3fa85807c84a5c8041e3bfdee96bff~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/bouquets-10d.png" alt="Bouquets 10D Vrac" /></div>
+          <p class="slide-name">Bouquets 10D Vrac</p>
+          <p class="slide-price">24,99 €</p>
+        </a>
+        <a class="slide-card product-card" href="https://www.sarahcils.com/product-page/cils-volume-russe-c-d-0-05-taille-unique">
+          <div class="slide-imgwrap"><img src="https://static.wixstatic.com/media/54d2ff_3c3fa85807c84a5c8041e3bfdee96bff~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/volume-russe.png" alt="Volume Russe C/D 0.05" /></div>
+          <span class="slide-badge">Nouveauté</span>
+          <p class="slide-name">Volume Russe C/D 0.05</p>
+          <p class="slide-price">14,99 €</p>
+        </a>
+        <a class="slide-card product-card" href="https://www.sarahcils.com/product-page/cil-%C3%A0-cil-classique-courbure-d-effet-mascara">
+          <div class="slide-imgwrap"><img src="https://static.wixstatic.com/media/54d2ff_3c3fa85807c84a5c8041e3bfdee96bff~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/cil-a-cil.png" alt="Cil à Cil Classique D" /></div>
+          <span class="slide-badge">Nouveauté</span>
+          <p class="slide-name">Cil à Cil Classique D</p>
+          <p class="slide-price">14,99 €</p>
+        </a>
+      </div>
+      <button class="slider-btn next" id="sliderNext" aria-label="Suivant">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- 6. BEST SELLER FOCUS -->
+<section class="bs">
+  <div class="container bs-grid">
+    <div class="bs-text">
+      <p class="bs-eyebrow">Notre best seller</p>
+      <h2 class="bs-title reveal">La Colle Sarah Cils</h2>
+      <ul class="bs-list">
+        <li>Rétention exceptionnelle jusqu'à 6 semaines</li>
+        <li>Confort optimal, ne pique pas les yeux</li>
+        <li>Stabilité constante, pose après pose</li>
+        <li>Compatible 40% à 70% d'humidité</li>
+      </ul>
+      <a class="bs-cta" href="https://www.sarahcils.com/product-page/colle">Voir le produit</a>
+    </div>
+    <img class="bs-img" src="https://static.wixstatic.com/media/dec4a3_21b7cc3550ea4e2cbcee7084618dbc9a~mv2.jpg/v1/fill/w_800,h_1000,al_c,q_85,enc_avif,quality_auto/bestseller.jpg" alt="La Colle Sarah Cils" />
+  </div>
+</section>
+
+<!-- 7. NOTRE HISTOIRE -->
+<section class="about" id="about">
+  <div class="container about-grid reveal">
+    <div class="about-text">
+      <p class="eyebrow">Notre histoire</p>
+      <h2 class="section-title">L'exigence du terrain, la performance d'une marque.</h2>
+      <p>Chaque jour, dans notre institut à Marseille, nous réalisions des dizaines de poses d'extensions de cils.</p>
+      <p>Bienvenue chez Sarah Cils. Je suis Sarah, technicienne spécialisée en extensions de cils depuis plus de 6 ans et co-fondatrice du Studio Beauté, aux côtés de Nawel, experte en onglerie.</p>
+      <p>Fondé en 2024, le Studio Beauté est né d'une passion commune pour la mise en beauté avec l'ambition de créer un lieu chaleureux, professionnel et inspirant. Situé à Marseille, à deux pas de La Valentine.</p>
+      <p>Je vous propose des prestations sur-mesure en extensions de cils, une gamme de produits professionnels testés et approuvés en cabine, ainsi que des formations certifiantes pour transmettre mon savoir-faire.</p>
+      <p>Après plusieurs années à travailler avec des produits industriels ne répondant pas toujours à mes exigences, j'ai créé ma propre marque. Conçus par une technicienne présente en institut au quotidien, mes produits sont pensés pour être fiables, performants et agréables à utiliser.</p>
+      <a class="about-cta" href="https://www.sarahcils.com/a-propos">En savoir plus</a>
+    </div>
+    <img class="about-img" src="https://static.wixstatic.com/media/54d2ff_9f777bd91a404fccb96fcf6c6ca20812~mv2.jpeg/v1/fill/w_900,h_1000,al_c,q_85,enc_avif,quality_auto/colle.jpg" alt="Atelier Sarah Cils" />
+  </div>
+</section>
+
+<!-- 8. AVIS CLIENTS -->
+<section class="reviews section-pad">
+  <div class="container px reveal">
+    <p class="eyebrow">Elles nous font confiance</p>
+    <p class="stat">+200 avis 5/5</p>
+    <p class="stars">★★★★★</p>
+    <p class="quote">Travail impeccable, que ce soit pour les ongles ou les cils. Toujours satisfaite, qualité au top !</p>
+    <p class="quote-author">— Cliente, mai 2025</p>
+  </div>
+</section>
+
+<!-- 9. CARDS SERVICES -->
+<section class="services section-pad" id="services">
+  <div class="container px">
+    <h2 class="section-title reveal">Notre univers</h2>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">◆</div>
+        <h3 class="service-title">Produits Pro</h3>
+        <p class="service-text">Formulés par une technicienne, testés chaque jour en cabine.</p>
+        <a class="service-link" href="https://www.sarahcils.com/boutique">Voir la boutique</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">✂</div>
+        <h3 class="service-title">Studio Beauté</h3>
+        <p class="service-text">Extensions de cils sur mesure. Marseille 12e, à deux pas de La Valentine.</p>
+        <a class="service-link" href="https://www.sarahcils.com/a-propos">Prendre rendez-vous</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">❋</div>
+        <h3 class="service-title">Formations</h3>
+        <p class="service-text">Certifiantes. Cil à Cil et Volume Russe. De débutante à experte.</p>
+        <a class="service-link" href="https://www.sarahcils.com/formations">Découvrir</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. FORMATIONS -->
+<section class="formations section-pad" id="formations">
+  <div class="container px">
+    <p class="eyebrow">Se former avec Sarah</p>
+    <h2 class="section-title reveal" style="margin-top:6px;">Une formation née de l'expérience terrain</h2>
+    <div class="form-grid">
+      <div class="form-card reveal">
+        <div class="form-imgwrap">
+          <img src="https://static.wixstatic.com/media/dec4a3_2bf2b6e3614146ab9fbd2b3cdeab9373~mv2.png/v1/crop/x_58,y_49,w_1022,h_1301/fill/w_600,h_700,al_c,q_85,enc_avif,quality_auto/formation-cil-a-cil.png" alt="Formation Cil à Cil" />
+          <div class="form-overlay"></div>
+          <span class="form-badge">Formation certifiante</span>
+          <div class="form-caption">
+            <h3>Cil à Cil</h3>
+            <p>Expert, formateur, évolutif</p>
+          </div>
+        </div>
+        <ul class="form-bullets">
+          <li>Idéal pour te lancer dans le métier</li>
+          <li>De la théorie à la pratique sur modèle</li>
+          <li>Lancement professionnel</li>
+        </ul>
+        <a class="form-cta" href="https://www.sarahcils.com/copie-de-formations">En savoir plus</a>
+      </div>
+      <div class="form-card reveal">
+        <div class="form-imgwrap">
+          <img src="https://static.wixstatic.com/media/dec4a3_09d56cce09e64535aa5ace20dca5acb0~mv2.png/v1/crop/x_0,y_36,w_1080,h_1314/fill/w_600,h_700,al_c,q_85,enc_avif,quality_auto/formation-volume-russe.png" alt="Formation Volume Russe" />
+          <div class="form-overlay"></div>
+          <span class="form-badge">Formation avancée</span>
+          <div class="form-caption">
+            <h3>Volume Russe</h3>
+            <p>Technique, sophistiqué, intensif</p>
+          </div>
+        </div>
+        <ul class="form-bullets">
+          <li>Maîtrise des bouquets préfaits</li>
+          <li>Pose sophistiquée, pratique intensive</li>
+          <li>Accompagnement personnalisé</li>
+        </ul>
+        <a class="form-cta" href="https://www.sarahcils.com/copie-de-formation-2">En savoir plus</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. INSTAGRAM CTA -->
+<section class="insta">
+  <div class="container px reveal">
+    <h2>Rejoignez notre univers</h2>
+    <p>Suivez-nous sur Instagram</p>
+    <a class="insta-cta" href="https://www.instagram.com/saraahcils/">Voir le profil @saraahcils</a>
+  </div>
+</section>
+
+<!-- 12. FOOTER -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <a href="#" class="footer-logo">
+      <img src="https://static.wixstatic.com/media/54d2ff_cb10be114fc34635bc46de799b2c474b~mv2.png/v1/crop/x_0,y_186,w_563,h_191/fill/w_310,h_100,al_c,q_85,enc_avif,quality_auto/SARAH%20CILS.png" alt="Sarah Cils" />
+    </a>
+    <div class="footer-info">
+      320 avenue des Poilus, 13012 Marseille<br />
+      <a href="tel:0677697550">06 77 69 75 50</a><br />
+      <a href="mailto:sarahcils@gmail.com">sarahcils@gmail.com</a><br />
+      <a href="https://www.instagram.com/saraahcils/">@saraahcils</a>
+    </div>
+    <hr class="footer-sep" />
+    <div class="footer-legal">
+      <a href="https://www.sarahcils.com/mentions-legales">Mentions légales</a>
+      <a href="https://www.sarahcils.com/cgv">CGV</a>
+      <a href="https://www.sarahcils.com/politique-de-livraison">Politique de livraison</a>
+      <a href="https://www.sarahcils.com/confidentialite">Confidentialité</a>
+      <a href="https://www.sarahcils.com/cookies">Cookies</a>
+    </div>
+    <p class="footer-copy">© 2025 Sarah Cils</p>
+  </div>
+</footer>
+
+<script>
+  // Burger menu
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }));
+
+  // Slider buttons
+  const slider = document.getElementById('slider');
+  document.getElementById('sliderPrev').addEventListener('click', () => slider.scrollBy({ left: -230, behavior: 'smooth' }));
+  document.getElementById('sliderNext').addEventListener('click', () => slider.scrollBy({ left: 230, behavior: 'smooth' }));
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
