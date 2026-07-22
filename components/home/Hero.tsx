@@ -1,4 +1,8 @@
+'use client'
+
 import { IMAGES } from '@/lib/images'
+
+const HERO_VIDEO_MAX_SECONDS = 12
 
 export default function Hero() {
   return (
@@ -13,6 +17,11 @@ export default function Hero() {
         preload="auto"
         aria-label="Sarah Cils studio"
         className="absolute inset-0 h-full w-full object-cover"
+        onTimeUpdate={(e) => {
+          if (e.currentTarget.currentTime >= HERO_VIDEO_MAX_SECONDS) {
+            e.currentTarget.currentTime = 0
+          }
+        }}
       />
       <div className="absolute inset-0 bg-black/35" />
       <div className="relative z-10 text-center text-white px-5 max-w-2xl mx-auto">
