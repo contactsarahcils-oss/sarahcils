@@ -1,16 +1,18 @@
-import Image from 'next/image'
 import { IMAGES } from '@/lib/images'
 
 export default function Hero() {
   return (
     <section className="relative h-[72vh] md:h-[85vh] flex items-center justify-center overflow-hidden">
-      <Image
-        src={IMAGES.heroBg}
-        alt="Sarah Cils studio"
-        fill
-        priority
-        className="object-cover"
-        sizes="100vw"
+      <video
+        src="/videos/hero-sarah-cils.mp4"
+        poster={IMAGES.heroBg}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-label="Sarah Cils studio"
+        className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-black/35" />
       <div className="relative z-10 text-center text-white px-5 max-w-2xl mx-auto">
